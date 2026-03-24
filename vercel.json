@@ -9,7 +9,9 @@
     "VITE_WS_URL": "@vite_ws_url"
   },
   "envPrefix": "VITE_",
-  "regions": ["iad"],
+  "regions": [
+    "iad"
+  ],
   "functions": {
     "api/**/*.ts": {
       "runtime": "nodejs20.x"

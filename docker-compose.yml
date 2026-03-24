@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  # FastAPI Backend
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    container_name: as3-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - DEBUG=True
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - LLM_MODEL=gpt-4
+    volumes:
+      - ./backend:/app/backend
+      - ./agents:/app/agents
+      - ./rag:/app/rag
+    networks:
+      - as3-network
+    depends_on:
+      - postgres
+    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # React Frontend - Run locally instead: cd frontend && npm run dev
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: ../docker/Dockerfile.frontend
+  #   container_name: as3-frontend
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - VITE_API_URL=http://localhost:8000
+  #     - VITE_WS_URL=ws://localhost:8000
+  #   volumes:
+  #     - ./frontend/src:/app/src
+  #     - ./frontend/public:/app/public
+  #   networks:
+  #     - as3-network
+  #   depends_on:
+  #     - backend
+  #   command: npm run dev
+
+  # PostgreSQL Database (optional)
+  postgres:
+    image: postgres:16-alpine
+    container_name: as3-postgres
+    environment:
+      - POSTGRES_USER=as3user
+      - POSTGRES_PASSWORD=as3password
+      - POSTGRES_DB=as3_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - as3-network
+
+networks:
+  as3-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

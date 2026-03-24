@@ -1,0 +1,38 @@
+# Code Owners Configuration
+# Automatically request reviews from code owners for PRs
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# ALL files default to the platform team
+* @platform-team
+
+# Backend services and API routes
+backend/ @backend-team @platform-team
+backend/services/ @backend-team @ml-team
+backend/api/routes/ @backend-team @platform-team
+backend/database/ @backend-team @platform-team
+backend/tests/ @backend-team
+
+# Frontend components and styles
+frontend/src/components/ @frontend-team @platform-team
+frontend/src/services/ @frontend-team @platform-team
+frontend/src/context/ @frontend-team
+frontend/src/__tests__/ @frontend-team
+
+# AI/ML Services
+backend/services/anomaly_detection_service.py @ml-team @backend-team
+backend/services/hypothesis_generator.py @ml-team @backend-team
+backend/services/multi_agent_system.py @ml-team @backend-team
+agents/ @ml-team
+
+# Infrastructure and Deployment
+docker/ @devops-team @platform-team
+k8s/ @devops-team @platform-team
+scripts/ @devops-team @platform-team
+.github/ @devops-team @platform-team
+monitoring/ @devops-team
+
+# Configuration and documentation
+*.md @documentation-team @platform-team
+.env.example @platform-team @devops-team
+requirements*.txt @backend-team @devops-team
+frontend/package.json @frontend-team @devops-team

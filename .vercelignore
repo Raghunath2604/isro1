@@ -1,0 +1,53 @@
+# Backend
+backend/
+requirements.txt
+requirements*.txt
+venv/
+.venv/
+Dockerfile
+docker-compose.yml
+
+# Kubernetes
+k8s/
+.github/workflows/
+
+# Database
+*.db
+*.sqlite
+postgres_data/
+
+# Monitoring
+monitoring/
+prometheus.yml
+grafana.yml
+
+# Testing
+.pytest_cache/
+coverage/
+.coverage
+
+# Git
+.git/
+.gitignore
+
+# Config
+.env
+.env.local
+
+# Documentation
+DEPLOYMENT_GUIDE.md
+DEVELOPMENT.md
+TESTING_GUIDE.md
+PHASE_*.md
+
+# CI/CD
+.github/workflows/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
